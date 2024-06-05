@@ -1,63 +1,97 @@
-<<<<<<< HEAD
-# 说明
-本脚本来自于gh0stzk的RiceInstaller脚本，该脚本适用于Archlinux User一键式安装bspwm窗口管理器和其附带的组件（包括sxhkd、polybar等等），并提供了多套不同的Rice主题，有兴趣的Archlinuxer可以看一看。
+# BSPWM Temas | Entorno completo con bspwm
 
-本脚本针对Debian做了一些修改，修改的内容如下：
-- 删除了lightdm和lightdm-gtk-greeter等组件，因此初次安装的朋友可能需要通过在tty下输入startx等方式开始使用bspwm，如果提前安装了display manager则不用关心
-- 删除了安装Neovim，目前Debian上的nvim版本较低不太合适安装lazyvim，所以建议朋友们手动安装nvim及其管理器等工具
-- 删除了不能通过apt安装的一些字体，脚本里提供了通过github repo方式安装一些特定需要的字体
-- 删除了zsh的一些插件安装，修改了.zshrc使用zplug管理插件
-- 增加了安装figlet和lolcat工具，可以在执行脚本时显示当前的用户欢迎Logo
-- 添加了netselect-apt工具，可以使用该工具更新source.list文件以选择最快的仓库源
-- 配置文件修改
-  - ploybar配置文件中将Arch的logo替换为Debian的Logo
-  - 将默认的empty text修改为Debian linux
-
-# 使用方法
-## Debian安装
-
-```bash
-git clone --depth=1 https://github.com/allenmagic/dotfiles.git
-cd dotfiles
-chmod +x DebianInstaller
-/.DebianInstaller
-```
-
-## Arch安装
-
-```bash
-git clone --depth=1 https://github.com/allenmagic/dotfiles.git
-cd dotfiles
-chmod +x RiceInstaller
-/.RiceInstaller
-=======
-# BSPWM themes | A complete bspwm environment
+<div align = center>
+   
+![bspwm-dotfiles](https://github.com/gh0stzk/dotfiles/assets/67278339/0340846a-74d4-4a43-9430-142b0832738d)
 
 
-> [!CAUTION]
-> ⚠️⚠️⚠️ This dotfiles are configured at **1600x900** resolution with **96** DPI and **1** monitor.
-> Some stuff might break on lower or higher resolutions, but still work!! ⚠️⚠️⚠️
+&ensp;[<kbd> <br> Instalacion <br> </kbd>](#-el-setup)&ensp;
+&ensp;[<kbd> <br> Caracteristicas <br> </kbd>](#-caracteristicas)&ensp;
+&ensp;[<kbd> <br> Temas <br> </kbd>](#-los-temas)&ensp;
+&ensp;[<kbd> <br> Atajos de teclado <br> </kbd>](#atajos-de-teclado-utiles-que-deberias-saber)&ensp;
+&ensp;[<kbd> <br> Wiki <br> </kbd>](https://github.com/gh0stzk/dotfiles/wiki)&ensp;
+<br><br><br></div>
+
+https://user-images.githubusercontent.com/67278339/211363959-9182ecb7-e56e-4598-afed-f352c5d2979e.mp4
+ 
+<br>
+
+## 🚀 Caracteristicas
+<img src="https://user-images.githubusercontent.com/67278339/221605474-21d65156-0cf7-485c-bd1a-40792c37817e.png" alt="Linux Fetch" align="right" width="450">
+
+**Experimenta la Magia de la Personalización con los dotfiles de gh0stzk para bspwm**
+
+<sup>¡Bienvenido al mundo de la personalización sin límites! Los dotfiles de gh0stzk para bspwm ofrecen una experiencia única y emocionante con 15 temas distintos, cada uno con esquemas de colores, estilo y personalidad cautivadora. Sumérgete en un viaje visual que transformará tu entorno de trabajo de una manera impresionante.</sup>
+
+**Cambia de temas al instante**
+
+<sup>Con el menú personalizado basado en rofi launcher, cambiar entre los 15 temas es tan fácil como un clic. Disfruta de la versatilidad de estilos y esquemas de colores al momento.</sup>
+
+**Coherencia en Todo el Sistema**
+
+<sup>Cada tema no solo cambia la apariencia de bspwm, sino que también transforma al instante el esquema de colores en la terminal alacritty, widgets eww, barras polybar, notificaciones y más. La armonía visual está garantizada en todos los rincones de tu sistema.</sup>
+
+**Widgets Eww Únicos**
+
+<sup>Descubre 4 widgets eww únicos, que incluyen un calendario, menú de apagado, reproductor de música y tarjeta de usuario. Estos widgets no solo son funcionales, sino que también se adaptan instantáneamente al esquema de colores del tema que elijas.</sup>
+
+**Personalización Completa**
+
+<sup>Menú de clic derecho elegante hecho con Jgmenu, que también se sincroniza con los temas para una coherencia visual impecable. Además, 10 barras hechas con polybar y 2 con widgets eww ofrecen una experiencia de usuario completamente personalizable.</sup>
+
+**Variedad de Fondos de Pantalla**
+
+<sup>Cada inicio de sesión te sorprenderá con un fondo de pantalla al azar seleccionado específicamente para el tema en uso. Pero si la sorpresa no es lo tuyo, nuestro menú de fondos de pantalla te permite elegir entre más de 5 fondos de pantalla exclusivos para cada tema.</sup>
+
+**Composición Visual con Picom**
+
+<sup>Experimenta la belleza sin esfuerzo con picom como compositor, proporcionando una estética agradable sin sacrificar rendimiento. Disfruta de una experiencia de trabajo sin complicaciones con efectos visuales agradables. Una configuracion balanceada entre rendimiento y estética.
+Ajusta la transparencia de tus ventanas abiertas con una simple combinación de teclas. Controla la apariencia de tu escritorio para que se adapte perfectamente a tu estado de ánimo y estilo.</sup>
+
+**Funcionalidades Adicionales:**
+
+- **Control de Música Local:**
+
+  <sup>Administra tu música local desde el módulo polybar y el reproductor ncmpcpp, ambos con un diseño único que se ajusta al esquema de colores del tema.</sup>
+- **Flexibilidad:**
+
+  <sup>Esconde y muestra la barra polybar y los widgets eww según tus necesidades, brindándote un control completo sobre tu espacio de trabajo.</sup>
+
+- **Scratchpad Funcional:**
+  
+  <sup>Accede a la funcionalidad scratchpad, una ventana de terminal que puedes mostrar o esconder según tus tareas, evitando que ocupe espacio innecesario en tu escritorio.</sup>
+
+¡Transforma tu experiencia de usuario con los dotfiles de gh0stzk para bspwm! Descarga ahora y da vida a tu escritorio con estilo y personalidad.
+
+## :book: Wiki
+Ya comencé a escribir la [**Wiki**](https://github.com/gh0stzk/dotfiles/wiki), deberías darle una lectura. Si es tu primera vez con un WM tal vez te interese leer [Primeros pasos despues de instalar los dotfiles](https://github.com/gh0stzk/dotfiles/wiki/Firsts-steps-after-installing) ó tal vez leer las [pregumtas y respuestas](https://github.com/gh0stzk/dotfiles/wiki/Questions---Answers) [Atajos de teclado](https://github.com/gh0stzk/dotfiles/wiki/Keyboard-Shortcuts)[Tema Firefox](https://github.com/gh0stzk/dotfiles/wiki/Firefox-Theme).
 
 <br>
 
+> [!CAUTION]
+> ⚠️⚠️⚠️ Esta configuración fue hecha en una resolución **1600x900** con **96** DPI y **1** monitor.
+> Algunas cosas prodrian romperse en una resolucion menor o mayor, pero igual funcionara!! ⚠️⚠️⚠️
 
-## 🎨 The themes
+<br>
 
-| :tshirt: Theme Selector |
+## 🎨 Los Temas
+
+| :tshirt: Menu de Temas |
 |:-:|
 |![Screenshot-11_12_2023-01-06-03](https://github.com/gh0stzk/dotfiles/assets/67278339/b11b5c58-b9ec-446b-8980-4f77bebb3432)|
 
-| :traffic_light: Wallpaper Selector |
+| :traffic_light: Menu Wallpapers |
 |:-:|
 |![Screenshot-11_12_2023-01-03-00](https://github.com/gh0stzk/dotfiles/assets/67278339/0746df0f-6a56-44d6-a899-7bdbc0f1a593)|
 
+
 ### 🌸Emilia:
 
-|<img src="https://user-images.githubusercontent.com/67278339/280174054-8f56d12d-4efa-4024-99e1-4679591b45ca.gif" alt="Emilia Rice" align="center">|
+|<img src="https://github.com/gh0stzk/dotfiles/assets/67278339/8f56d12d-4efa-4024-99e1-4679591b45ca" alt="Emilia Rice" align="center">|
 |---|
 
 <details>
-<summary><b>Extra wallpapers in Emilia</b></summary>
+<summary><b>Extra wallpapers en Emilia</b></summary>
 
 |<img src="config/bspwm/rices/emilia/walls/wall-02.webp" alt="Emilia Rice" align="center" width="150px">|<img src="config/bspwm/rices/emilia/walls/wall-03.webp" alt="Emilia Rice" align="center" width="150px">|<img src="config/bspwm/rices/emilia/walls/wall-04.webp" alt="Emilia Rice" align="center" width="150px">|
 |:-:|:-:|:-:|
@@ -71,7 +105,7 @@ chmod +x RiceInstaller
 |---|
 
 <details>
-<summary><b>Extra wallpapers in Jan</b></summary>
+<summary><b>Extra wallpapers en Jan</b></summary>
 
 |<img src="config/bspwm/rices/jan/walls/wall-01.webp" alt="Jan Rice" align="center" width="150px">|<img src="config/bspwm/rices/jan/walls/wall-02.webp" alt="Jan Rice" align="center" width="150px">|<img src="config/bspwm/rices/jan/walls/wall-03.webp" alt="Jan Rice" align="center" width="150px">|
 |:-:|:-:|:-:|
@@ -85,7 +119,7 @@ chmod +x RiceInstaller
 |---|
 
 <details>
-<summary><b>Extra wallpapers in Aline</b></summary>
+<summary><b>Extra wallpapers en Aline</b></summary>
 
 |<img src="config/bspwm/rices/aline/walls/wall-02.webp" alt="Aline Rice" align="center" width="150px">|<img src="config/bspwm/rices/aline/walls/wall-03.webp" alt="Aline Rice" align="center" width="150px">|<img src="config/bspwm/rices/aline/walls/wall-04.webp" alt="Aline Rice" align="center" width="150px">|
 |:-:|:-:|:-:|
@@ -99,7 +133,7 @@ chmod +x RiceInstaller
 |---|
 
 <details>
-<summary><b>Extra wallpapers in Andrea</b></summary>
+<summary><b>Extra wallpapers en Andrea</b></summary>
 
 |<img src="config/bspwm/rices/andrea/walls/wall-02.webp" alt="Andrea Rice" align="center" width="150px">|<img src="config/bspwm/rices/andrea/walls/wall-03.webp" alt="Andrea Rice" align="center" width="150px">|<img src="config/bspwm/rices/andrea/walls/wall-04.webp" alt="Andrea Rice" align="center" width="150px">
 |:-:|:-:|:-:|
@@ -113,7 +147,7 @@ chmod +x RiceInstaller
 |---|
 
 <details>
-<summary><b>Extra wallpapers in Cynthia</b></summary>
+<summary><b>Extra wallpapers en Cynthia</b></summary>
 
 |<img src="config/bspwm/rices/cynthia/walls/wall-01.webp" alt="Cynthia Rice" align="center" width="150px">|<img src="config/bspwm/rices/cynthia/walls/wall-02.webp" alt="Cynthia Rice" align="center" width="150px">|<img src="config/bspwm/rices/cynthia/walls/wall-04.webp" alt="Cynthia Rice" align="center" width="150px">|
 |:-:|:-:|:-:|
@@ -127,7 +161,7 @@ chmod +x RiceInstaller
 |---|
 
 <details>
-<summary><b>Extra wallpapers in Isabel</b></summary>
+<summary><b>Extra wallpapers en Isabel</b></summary>
 
 |<img src="config/bspwm/rices/isabel/walls/wall-02.webp" alt="Isabel Rice" align="center" width="150px">|<img src="config/bspwm/rices/isabel/walls/wall-03.webp" alt="Isabel Rice" align="center" width="150px">|<img src="config/bspwm/rices/isabel/walls/wall-04.webp" alt="Isabel Rice" align="center" width="150px">|
 |:-:|:-:|:-:|
@@ -141,7 +175,7 @@ chmod +x RiceInstaller
 |---|
 
 <details>
-<summary><b>Extra wallpapers in Silvia</b></summary>
+<summary><b>Extra wallpapers en Silvia</b></summary>
 
 |<img src="config/bspwm/rices/silvia/walls/wall-01.webp" alt="Silvia Rice" align="center" width="150px">|<img src="config/bspwm/rices/silvia/walls/wall-03.webp" alt="Silvia Rice" align="center" width="150px">|<img src="config/bspwm/rices/silvia/walls/wall-04.webp" alt="Silvia Rice" align="center" width="150px">|
 |:-:|:-:|:-:|
@@ -155,7 +189,7 @@ chmod +x RiceInstaller
 |---|
 
 <details>
-<summary><b>Extra wallpapers in Melissa</b></summary>
+<summary><b>Extra wallpapers en Melissa</b></summary>
 
 |<img src="config/bspwm/rices/melissa/walls/wall-02.webp" alt="Melissa Rice" align="center" width="150px">|<img src="config/bspwm/rices/melissa/walls/wall-03.webp" alt="Melissa Rice" align="center" width="150px">|<img src="config/bspwm/rices/melissa/walls/wall-04.webp" alt="Melissa Rice" align="center" width="150px">|
 |:-:|:-:|:-:|
@@ -169,7 +203,7 @@ chmod +x RiceInstaller
 |---|
 
 <details>
-<summary><b>Extra wallpapers in Pamela</b></summary>
+<summary><b>Extra wallpapers en Pamela</b></summary>
 
 |<img src="config/bspwm/rices/pamela/walls/wall-02.webp" alt="Pamela Rice" align="center" width="150px">|<img src="config/bspwm/rices/pamela/walls/wall-03.webp" alt="Pamela Rice" align="center" width="150px">|<img src="config/bspwm/rices/pamela/walls/wall-04.webp" alt="Pamela Rice" align="center" width="150px">|
 |:-:|:-:|:-:|
@@ -183,7 +217,7 @@ chmod +x RiceInstaller
 |---|
 
 <details>
-<summary><b>Extra wallpapers in Cristina</b></summary>
+<summary><b>Extra wallpapers en Cristina</b></summary>
 
 |<img src="config/bspwm/rices/cristina/walls/wall-02.webp" alt="Cristina Rice" align="center" width="150px">|<img src="config/bspwm/rices/cristina/walls/wall-03.webp" alt="Cristina Rice" align="center" width="150px">|<img src="config/bspwm/rices/cristina/walls/wall-04.webp" alt="Cristina Rice" align="center" width="150px">|
 |:-:|:-:|:-:|
@@ -197,7 +231,7 @@ chmod +x RiceInstaller
 |---|
 
 <details>
-<summary><b>Extra wallpapers in Karla</b></summary>
+<summary><b>Extra wallpapers en Karla</b></summary>
 
 |<img src="config/bspwm/rices/karla/walls/wall-02.webp" alt="Karla Rice" align="center" width="150px">|<img src="config/bspwm/rices/karla/walls/wall-03.webp" alt="Karla Rice" align="center" width="150px">|<img src="config/bspwm/rices/karla/walls/wall-04.webp" alt="Karla Rice" align="center" width="150px">|
 |:-:|:-:|:-:|
@@ -212,7 +246,7 @@ chmod +x RiceInstaller
 |---|
 
 <details>
-<summary><b>Extra wallpapers in z0mbi3</b></summary>
+<summary><b>Extra wallpapers en z0mbi3</b></summary>
 
 |<img src="config/bspwm/rices/z0mbi3/walls/wall-01.webp" alt="z0mbi3 Rice" align="center" width="150px">|<img src="config/bspwm/rices/z0mbi3/walls/wall-02.webp" alt="z0mbi3 Rice" align="center" width="150px">|<img src="config/bspwm/rices/z0mbi3/walls/wall-03.webp" alt="z0mbi3 Rice" align="center" width="150px">|
 |:-:|:-:|:-:|
@@ -226,7 +260,7 @@ chmod +x RiceInstaller
 |---|
 
 <details>
-<summary><b>Extra wallpapers in Brenda</b></summary>
+<summary><b>Extra wallpapers en Brenda</b></summary>
 
 |<img src="config/bspwm/rices/brenda/walls/wall-01.webp" alt="Brenda Rice" align="center" width="150px">|<img src="config/bspwm/rices/brenda/walls/wall-02.webp" alt="Brenda Rice" align="center" width="150px">|<img src="config/bspwm/rices/brenda/walls/wall-04.webp" alt="Brenda Rice" align="center" width="150px">|
 |:-:|:-:|:-:|
@@ -240,7 +274,7 @@ chmod +x RiceInstaller
 |---|
 
 <details>
-<summary><b>Extra wallpapers in Daniela</b></summary>
+<summary><b>Extra wallpapers en Daniela</b></summary>
 
 |<img src="config/bspwm/rices/daniela/walls/wall-01.webp" alt="Daniela Rice" align="center" width="150px">|<img src="config/bspwm/rices/daniela/walls/wall-03.webp" alt="Daniela Rice" align="center" width="150px">|<img src="config/bspwm/rices/daniela/walls/wall-04.webp" alt="Daniela Rice" align="center" width="150px">|
 |:-:|:-:|:-:|
@@ -254,7 +288,7 @@ chmod +x RiceInstaller
 |---|
 
 <details>
-<summary><b>Extra wallpapers in Marisol</b></summary>
+<summary><b>Extra wallpapers en Marisol</b></summary>
 
 |<img src="config/bspwm/rices/marisol/walls/wall-01.webp" alt="Marisol Rice" align="center" width="150px">|<img src="config/bspwm/rices/marisol/walls/wall-02.webp" alt="Marisol Rice" align="center" width="150px">|<img src="config/bspwm/rices/marisol/walls/wall-03.webp" alt="Marisol Rice" align="center" width="150px">|
 |:-:|:-:|:-:|
@@ -266,50 +300,49 @@ chmod +x RiceInstaller
 
 |<img src="https://github.com/gh0stzk/dotfiles/assets/67278339/9b956d3d-fc7b-49ca-b27f-dc6aa83d9e2f" alt="Firefox theme - z0mbi3-Fox" width="700">|
 |:-:|
-Complementarily you can install [this extension](https://github.com/PonyLucky/gh0stzk-Firefox/tree/master/extension) made by [PonyLucky](https://github.com/PonyLucky). It is a startpage to enhance UX. [Preview and configuration options](https://github.com/PonyLucky/gh0stzk-Firefox/tree/master/extension). Looks awesome with the firefox theme.
+Tambien puedes instalar [esta extension](https://github.com/PonyLucky/gh0stzk-Firefox/tree/master/extension) hecha por [PonyLucky](https://github.com/PonyLucky). Es una pagina de inicioi. [Preview y opciones de configuracion](https://github.com/PonyLucky/gh0stzk-Firefox/tree/master/extension). Se ve genial con mi tema de firefox.
 
 ## Neovim Setup
 
 |<img src="https://github.com/gh0stzk/dotfiles/assets/67278339/17a1eb30-437e-4bf2-980c-6a410eff76bb" alt="Neovim configuration" width="700">|
 |:-:|
-Plugins included [Neovim setup wiki](https://github.com/gh0stzk/dotfiles/wiki/Neovim-setup)
+Plugins incluidos [Neovim setup wiki](https://github.com/gh0stzk/dotfiles/wiki/Neovim-setup)
 
-## Very useful keybindigs to know...
+## Atajos de teclado utiles que deberias saber...
 
 | Keys | Action |
 |:-|:-|
-|<kbd>super</kbd> + <kbd>Enter</kbd><br><kbd>super</kbd> + <kbd>alt</kbd> + <kbd>Enter</kbd>| Open a terminal<br>Open a floating terminal.
-|<kbd>alt</kbd> + <kbd>@space</kbd>| Display menu to select a theme.
-|<kbd>super</kbd> + <kbd>@space</kbd>| Apps Menu.
-|<kbd>super</kbd> + <kbd>alt</kbd> + <kbd>w</kbd>| Opens a menu to select a wallpaper.
-|<kbd>super</kbd> + <kbd>h</kbd><br><kbd>super</kbd> + <kbd>u</kbd>|Hides bar/s<br>unhide bar/s
-|<kbd>Print</kbd>| Takes screenshot.
-|<kbd>ctrl</kbd> + <kbd>alt</kbd> + <kbd>[plus,minus,t]</kbd>| Changes transparency on focused window.
-|<kbd>ctrl</kbd> + <kbd>super</kbd> + <kbd>alt</kbd> + <kbd>p</kbd><br><kbd>ctrl</kbd> + <kbd>super</kbd> + <kbd>alt</kbd> + <kbd>r</kbd><br><kbd>ctrl</kbd> + <kbd>super</kbd> + <kbd>alt</kbd> + <kbd>k| Power off computer<br>Restart computer<br>Brute kill a window/process
-|<kbd>super</kbd> + <kbd>alt</kbd> + <kbd>r</kbd>| Restart bspwm.
+|<kbd>super</kbd> + <kbd>Enter</kbd><br><kbd>super</kbd> + <kbd>alt</kbd> + <kbd>Enter</kbd>| Abre una terminal<br>Abre una terminal flotante
+|<kbd>alt</kbd> + <kbd>@space</kbd>| Abre el menu para seleccionar un nuevo tema
+|<kbd>super</kbd> + <kbd>@space</kbd>| Menu de apps
+|<kbd>super</kbd> + <kbd>alt</kbd> + <kbd>w</kbd>| Menu para seleccionar un wallpaper
+|<kbd>super</kbd> + <kbd>h</kbd><br><kbd>super</kbd> + <kbd>u</kbd>|Esconde la barra/s<br>Muestra nuevamente la barra/s
+|<kbd>Print</kbd>| Toma captura de pantalla
+|<kbd>ctrl</kbd> + <kbd>alt</kbd> + <kbd>[plus,minus,t]</kbd>| Changes transparency on focused window
+|<kbd>ctrl</kbd> + <kbd>super</kbd> + <kbd>alt</kbd> + <kbd>p</kbd><br><kbd>ctrl</kbd> + <kbd>super</kbd> + <kbd>alt</kbd> + <kbd>r</kbd><br><kbd>ctrl</kbd> + <kbd>super</kbd> + <kbd>alt</kbd> + <kbd>k| Apaga la computadora<br>Reinicia la computadora<br>Mata un proceso o ventana
+|<kbd>super</kbd> + <kbd>alt</kbd> + <kbd>r</kbd>| Reinicia bspwm
 
-And more.. You need to look sxhkdrc file for more.
+Y mas... Necesitaras mirar el archivo sxhkdrc file para ver todos los atajos.
 
-## 📦 setup
+## 📦 El Setup
 
-### 💾 Installation:
-The installer only works for **ARCH** Linux, and based distros.
+### 💾 Instalacion:
+El instalador solo funciona con **ARCH** Linux, y derivadas.
 
-<b>Open a terminal in HOME</b>
-- **First download the installer**
+<b>Abre una terminal en tu HOME</b>
+- **Primero descarga el instalador**
 ```sh
 curl https://raw.githubusercontent.com/gh0stzk/dotfiles/master/RiceInstaller -o $HOME/RiceInstaller
 
-# Maybe you want a short url??
+# Tal vez quieres una url mas corta??
 
 curl -L https://is.gd/gh0stzk_dotfiles -o $HOME/RiceInstaller
 ```
-- **Now give it execute permissions**
+- **Ahora dale permisos de ejecucion**
 ```sh
 chmod +x RiceInstaller
 ```
-- **Finally run the installer**
+- **Finalmente ejecuta el instalador**
 ```sh
 ./RiceInstaller
->>>>>>> c2db682 (Initial commit)
 ```
