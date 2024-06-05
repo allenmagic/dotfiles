@@ -1,3 +1,3 @@
 # ignore the fonts folder another github repo
 ./misc/fonts/*
-./misc/fonts/
+./misc/fonts
