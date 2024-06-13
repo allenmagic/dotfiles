@@ -76,7 +76,7 @@ logo "Installing needed packages.."
 # Some packages without apt installation
 # 'zsh-history-substring-search'
 
-dependencias=(build-essential rust-all alacritty brightnessctl bspwm dunst feh firefox git kitty imagemagick jq \
+dependencias=(build-essential cargo alacritty brightnessctl bspwm dunst feh firefox git kitty imagemagick jq \
 			        jgmenu libwebp7 lsd maim mpc mpd ncmpcpp npm pamixer papirus-icon-theme \
 			        physlock picom playerctl polybar policykit-1-gnome python3-gi ranger \
 			        redshift rofi sxhkd tmux fonts-inconsolata fonts-jetbrains-mono  \
@@ -268,7 +268,7 @@ logo "installing Eww, tdrop & xqp"
 			cd "$HOME" || exit
 			git clone --depth=1 https://github.com/noctuid/tdrop.git
 			cd tdrop || exit
-			make && sudo make install
+			sudo make install
 		} && {
 			cd "$HOME" || exit
 		} 
