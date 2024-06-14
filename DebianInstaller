@@ -214,7 +214,7 @@ for dirs in ~/dotfiles/config/*; do
     fi
 done
 
-for folder in applications asciiart fonts startup-page; do
+for folder in applications asciiart startup-page fcitx5; do
     if cp -R ~/dotfiles/misc/$folder ~/.local/share/ 2>> RiceError.log; then
         printf "%s%s%s %sfolder copied succesfully!%s\n" "${BLD}" "${CYE}" "$folder" "${CGR}" "${CNC}"
         sleep 1
