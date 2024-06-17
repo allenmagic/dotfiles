@@ -29,7 +29,8 @@
 # 字体
 本脚本的字体相关安装内容拆分到另一个脚本中执行，但在本脚本中进行了font的git clone操作。目前字体部分git clone到/home/$USER/.local/share/fonts。在脚本执行完成后可以执行以下操作
 ```bash
-    cd ~/.local/share/fonts
+    git clone --depth=1 https://github.com/allenmagic/fonts
+    cd fonts
     chmod +x install
     ./install
 ```
