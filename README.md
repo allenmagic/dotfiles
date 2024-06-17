@@ -10,7 +10,7 @@
 - 添加了部分字体，包括平方字体等
 
 # 安装
-在~目录下git clone repo后将debianinstaller复制到~目录下
+在\~目录下git clone repo后将debianinstaller复制到\~目录下
 ```bash
     git clone --depth=1 https://github.com/allenmagic/dotfiles.git 
     cp DebianInstaller ~
