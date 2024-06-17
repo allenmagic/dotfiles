@@ -7,7 +7,7 @@
 - 添加了netselect-apt工具，可以用来管理apt的源
 - 添加了fcitx的配置文件和theme，适用于需要安装中文输入法的用户
 - 添加了一些Archlinux默认的壁纸，Debian用户可以自行删除后再添加Debian的系统默认壁纸
-- 添加了部分字体，包括平方字体等
+- 分拆了字体安装，可以后面的字体安装部分
 
 # 安装
 在\~目录下git clone repo后将debianinstaller复制到\~目录下
@@ -22,4 +22,12 @@
 ```bash
     chmod +x DebianInstaller
     bash DebianInstaller
+```
+
+# 字体
+本脚本的字体相关安装内容拆分到另一个脚本中执行，但在本脚本中进行了font的git clone操作。目前字体部分git clone到/home/$USER/.local/share/fonts。在脚本执行完成后可以执行以下操作
+```bash
+    cd ~/.local/share/fonts
+    chmod +x install
+    ./install
 ```
