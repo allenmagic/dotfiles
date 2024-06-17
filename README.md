@@ -13,7 +13,9 @@
 在\~目录下git clone repo后将debianinstaller复制到\~目录下
 ```bash
     git clone --depth=1 https://github.com/allenmagic/dotfiles.git 
+    cd dotfiles
     cp DebianInstaller ~
+    cd ~
 ```
 
 安装
