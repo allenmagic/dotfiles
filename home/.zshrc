@@ -86,10 +86,10 @@ PS1='%B%F{blue}󰣚%f%b  %B%F{magenta}%n%f%b $(dir_icon)  %B%F{red}%~%f%b${vcs_i
 #  ┌─┐┬  ┬ ┬┌─┐┬┌┐┌┌─┐
 #  ├─┘│  │ ││ ┬││││└─┐
 #  ┴  ┴─┘└─┘└─┘┴┘└┘└─┘
-if [[ ! -d ~/.zplug ]]; then
-  git clone --depth=1 https://github.com/zplug/zplug ~/.zplug
+if [[ ! -d ~/.config/zplug ]]; then
+  git clone --depth=1 https://github.com/zplug/zplug ~/.config/zplug 
 fi
-source ~/.zplug/init.zsh && zplug update --self
+source ~/.config/zplug/init.zsh && zplug update --self
 
 zplug "zsh-users/zsh-autosuggestions", as:plugin
 zplug "zsh-users/zsh-syntax-highlighting", as:plugin
@@ -104,7 +104,7 @@ if ! zplug check --verbose; then
     echo
   fi
 fi
-zplug load --verbose
+zplug load
 
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
