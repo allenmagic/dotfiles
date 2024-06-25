@@ -292,6 +292,22 @@ logo "installing Eww, tdrop & xqp"
     }
 fi
 
+# Installing xqp
+	if command -v xqp >/dev/null 2>&1; then 
+		printf "\n%s%sxqp is already installed%s\n" "${BLD}" "${CGR}" "${CNC}"
+	else
+		printf "\n%s%sInstalling xqp, this should be fast!%s\n" "${BLD}" "${CBL}" "${CNC}"
+		{
+			cd "$HOME" || exit
+			git clone --depth=1 https://github.com/baskerville/xqp.git
+			cd xqp || exit
+			make && sudo make install
+		} && {
+			cd "$HOME" || exit
+		} || {
+        printf "\n%s%sFailed to install xqp. You may need to install it manually%s\n" "${BLD}" "${CRE}" "${CNC}"
+    }
+fi
 
 # Installing stalonetray and clear the installation folder
 	if command -v stalonetray >/dev/null 2>&1; then 
