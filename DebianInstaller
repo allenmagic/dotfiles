@@ -77,10 +77,10 @@ logo "Installing needed packages.."
 # 'zsh-history-substring-search'
 
 dependencias=(build-essential cargo alacritty brightnessctl bspwm dunst feh firefox git kitty imagemagick jq jgmenu \
-		libwebp7 lsd maim mpc mpd ncmpcpp npm pamixer papirus-icon-theme physlock picom playerctl polybar \
-		policykit-1-gnome python3-gi ranger redshift rofi sxhkd tmux fonts-inconsolata fonts-jetbrains-mono \
-		webp-pixbuf-loader xclip xdg-user-dirs x11-xserver-utils xdo xdotool x11-utils zsh wget netselect-apt \
-		ueberzug xorg lightdm lightdm-gtk-greeter fcitx5 fcitx5-chinese-addons)
+        libwebp7 lsd maim mpc mpd ncmpcpp npm pamixer papirus-icon-theme physlock picom playerctl polybar \
+        policykit-1-gnome python3-gi ranger redshift rofi sxhkd tmux fonts-inconsolata fonts-jetbrains-mono \
+        webp-pixbuf-loader xclip xdg-user-dirs x11-xserver-utils xdo xdotool x11-utils zsh wget netselect-apt \
+        ueberzug xorg lightdm lightdm-gtk-greeter fcitx5 fcitx5-chinese-addons)
 
 printf "%s%sChecking for required packages...%s\n" "${BLD}" "${CBL}" "${CNC}"
 for paquete in "${dependencias[@]}"; do
@@ -245,19 +245,19 @@ sleep 5
 logo "installing Eww, tdrop & xqp"
 
 # Intalling tdrop for scratchpads
-	if command -v tdrop >/dev/null 2>&1; then
-		printf "\n%s%sTdrop is already installed%s\n" "${BLD}" "${CGR}" "${CNC}"
-	else
-		printf "\n%s%sInstalling tdrop, this should be fast!%s\n" "${BLD}" "${CBL}" "${CNC}"
-		{
-			cd "$HOME" || exit
-			git clone --depth=1 https://github.com/noctuid/tdrop.git
-			cd tdrop || exit
-			sudo make install
-		} && {
-			cd "$HOME" || exit
-		} 
-	fi
+    if command -v tdrop >/dev/null 2>&1; then
+        printf "\n%s%sTdrop is already installed%s\n" "${BLD}" "${CGR}" "${CNC}"
+    else
+        printf "\n%s%sInstalling tdrop, this should be fast!%s\n" "${BLD}" "${CBL}" "${CNC}"
+        {
+            cd "$HOME" || exit
+            git clone --depth=1 https://github.com/noctuid/tdrop.git
+            cd tdrop || exit
+            sudo make install
+        } && {
+            cd "$HOME" || exit
+        } 
+    fi
 
 
 # Installing Eww
@@ -266,54 +266,48 @@ if command -v eww >/dev/null 2>&1; then
 else
     printf "\n%s%sDownload and installing eww..%s\n" "${BLD}" "${CBL}" "${CNC}"
     if curl -L https://github.com/gh0stzk/pkgs/raw/main/eww -o eww; then
-		echo "Download complete."
-		chmod +x eww
-		echo "Installing eww..."
-			if sudo install -Dm755 eww /usr/bin/eww; then
-				echo "Installation complete."
-				rm eww
-			else
-				echo "Error: Something happend."
-			fi
-	else
-		echo "Error: The file can't be downloaded.."
-	fi
+        echo "Download complete."
+        chmod +x eww
+        echo "Installing eww..."
+            if sudo install -Dm755 eww /usr/bin/eww; then
+                echo "Installation complete."
+                rm eww
+            else
+                echo "Error: Something happend."
+            fi
+    else
+        echo "Error: The file can't be downloaded.."
+    fi
 fi
 
 # Installing xqp
-	if command -v xqp >/dev/null 2>&1; then 
-		printf "\n%s%sxqp is already installed%s\n" "${BLD}" "${CGR}" "${CNC}"
-	else
-		printf "\n%s%sInstalling xqp, this should be fast!%s\n" "${BLD}" "${CBL}" "${CNC}"
-		{
-			cd "$HOME" || exit
-			git clone --depth=1 https://github.com/baskerville/xqp.git
-			cd xqp || exit
-			make && sudo make install
-		} && {
-			cd "$HOME" || exit
-		} || {
+    if command -v xqp >/dev/null 2>&1; then 
+        printf "\n%s%sxqp is already installed%s\n" "${BLD}" "${CGR}" "${CNC}"
+    else
+        printf "\n%s%sInstalling xqp, this should be fast!%s\n" "${BLD}" "${CBL}" "${CNC}"
+        {
+            cd "$HOME" || exit
+            git clone --depth=1 https://github.com/baskerville/xqp.git
+            cd xqp || exit
+            make && sudo make install
+        } && {
+            cd "$HOME" || exit
+        } || {
         printf "\n%s%sFailed to install xqp. You may need to install it manually%s\n" "${BLD}" "${CRE}" "${CNC}"
     }
 fi
 
 # Installing stalonetray and clear the installation folder
-	if command -v stalonetray >/dev/null 2>&1; then 
-		printf "\n%s%sstalonetray is already installed%s\n" "${BLD}" "${CGR}" "${CNC}"
-	else
-		printf "\n%s%sInstalling stalonetray, this could take 10 mins or more.%s\n" "${BLD}" "${CBL}" "${CNC}"
-		{
-			cd "$HOME" || exit
-			git clone --depth=1 https://github.com/kolbusa/stalonetray.git
-			cd stalonetray || exit
-			sudo apt install autoconf automake docbook-xsl libxpm-dev libx11-dev xsltproc -y
-			aclocal && autoheader && autoconf && automake --add-missing
-			./configure
-			make && sudo make install
-		} && {
-			cd "$HOME" || exit
-			rm -rf {tdrop,.cargo,eww,stalonetray}
-		} || {
+    if command -v stalonetray >/dev/null 2>&1; then 
+        printf "\n%s%sstalonetray is already installed%s\n" "${BLD}" "${CGR}" "${CNC}"
+    else
+        printf "\n%s%sInstalling stalonetray, this could take 10 mins or more.%s\n" "${BLD}" "${CBL}" "${CNC}"
+        {
+            cd ~/dotfiles/packages/ || exit
+            sudo dpkg -i stalonetray_0.8.3-1_amd64.deb
+        } && {
+            cd "$HOME" || exit
+        } || {
         printf "\n%s%sFailed to install stalonetray. You may need to install it manually%s\n" "${BLD}" "${CRE}" "${CNC}"
     }
 fi
