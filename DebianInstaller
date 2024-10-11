@@ -261,23 +261,23 @@ logo "installing Eww, tdrop & xqp"
 
 
 # Installing Eww
-	if command -v eww >/dev/null 2>&1; then 
-		printf "\n%s%sEww is already installed%s\n" "${BLD}" "${CGR}" "${CNC}"
+if command -v eww >/dev/null 2>&1; then
+    printf "\n%s%sEww is already installed%s\n" "${BLD}" "${CGR}" "${CNC}"
+else
+    printf "\n%s%sDownload and installing eww..%s\n" "${BLD}" "${CBL}" "${CNC}"
+    if curl -L https://github.com/gh0stzk/pkgs/raw/main/eww -o eww; then
+		echo "Download complete."
+		chmod +x eww
+		echo "Installing eww..."
+			if sudo install -Dm755 eww /usr/bin/eww; then
+				echo "Installation complete."
+				rm eww
+			else
+				echo "Error: Something happend."
+			fi
 	else
-		printf "\n%s%sInstalling Eww, this could take 10 mins or more.%s\n" "${BLD}" "${CBL}" "${CNC}"
-		{
-			cd "$HOME" || exit
-			git clone --depth=1 https://github.com/elkowar/eww
-			cd eww || exit
-			curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --default-toolchain none -y
-			sudo apt install libgtk-3-dev libdbusmenu-glib-dev libdbusmenu-gtk3-dev libglib2.0-dev -y
-			cargo build --release --no-default-features --features x11
-			sudo install -m 755 "$HOME/eww/target/release/eww" -t /usr/bin/
-		} && {
-			cd "$HOME" || exit
-		} || {
-        printf "\n%s%sFailed to install Eww. You may need to install it manually%s\n" "${BLD}" "${CRE}" "${CNC}"
-    }
+		echo "Error: The file can't be downloaded.."
+	fi
 fi
 
 # Installing xqp
