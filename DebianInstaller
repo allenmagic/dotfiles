@@ -9,7 +9,7 @@
 #   Author: allenmagic 
 #   url: https://github.com/allenmagic
 #   Date: 2024-06-01
-#   Comment: due to lower version NeoVIM in Debian so I delete the neovim configuration,
+#   Comment: due to lower version NeoVIM on Debian so I delete the neovim configuration,
 #   you can install it mannually and download config files from github as you want.
 
 CRE=$(tput setaf 1)
@@ -114,26 +114,14 @@ logo "Downloading dotfiles"
 repo_url="https://github.com/allenmagic/dotfiles"
 repo_dir="$HOME/dotfiles"
 
-fonts_repo_url="https://github.com/allenmagic/fonts"
-fonts_dir="$HOME/.local/share/fonts"
-
 # Verifies if the folder of the repository exists
-#if [ -d "$repo_dir" ]; then
-#    printf "Removing existing dotfiles repository\n"
-#    rm -rf "$repo_dir"
-#fi
-
-if [ -d "$fonts_dir" ]; then
-    printf "Make the fonts dir\n"
-    mkdir -p "$repo_dir"
+if [ -d "$repo_dir" ]; then
+    printf "Removing existing dotfiles repository\n"
+    rm -rf "$repo_dir"
 fi
 
-# Clone the repository
-printf "Cloning fonts from %s\n" "$fonts_repo_url"
-git clone --depth=1 "$fonts_repo_url" "$fonts_dir" &
-
-#printf "Cloning dotfiles from %s\n" "$repo_url"
-#git clone --depth=1 "$repo_url" "$repo_dir"
+printf "Cloning dotfiles from %s\n" "$repo_url"
+git clone --depth=1 "$repo_url" "$repo_dir"
 sleep 2
 clear
 
@@ -331,6 +319,26 @@ fi
 fi
 
 
+########## ---------- Installing needed fonts ---------- ##########
+
+logo "installing fonts"
+
+fonts_repo_url="https://github.com/allenmagic/fonts"
+fonts_dir="$HOME/.local/share/fonts"
+
+if [ ! -e "$fonts_dir" ]; then
+    printf "Make the fonts dir\n"
+    mkdir -p "$fonts_dir"
+fi
+
+# Clone the repository
+printf "Cloning fonts from %s\n" "$fonts_repo_url"
+git clone --depth=1 "$fonts_repo_url" "$fonts_dir" 
+
+cd $fonts_dir & chmod +x install & ./install
+
+sleep 2
+clear
 
 
 ########## ---------- Enabling MPD service ---------- ##########
