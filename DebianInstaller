@@ -240,7 +240,7 @@ fc-cache -rv >/dev/null 2>&1
 printf "\n\n%s%sFiles copied succesfully!!%s\n" "${BLD}" "${CGR}" "${CNC}"
 sleep 5
 
-########## ---------- Installing neovim & others ---------- ##########
+########## ---------- Installing Eww, tdrop, xqp & others ---------- ##########
 
 logo "installing Eww, tdrop & xqp"
 
