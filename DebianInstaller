@@ -335,8 +335,6 @@ fi
 printf "Cloning fonts from %s\n" "$fonts_repo_url"
 git clone --depth=1 "$fonts_repo_url" "$fonts_dir" 
 
-cd $fonts_dir & chmod +x install & ./install
-
 sleep 2
 clear
 
