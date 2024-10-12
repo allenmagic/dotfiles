@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+ #!/usr/bin/env bash
 #  ██████╗ ██╗ ██████╗███████╗    ██╗███╗   ██╗███████╗████████╗ █████╗ ██╗     ██╗     ███████╗██████╗
 #  ██╔══██╗██║██╔════╝██╔════╝    ██║████╗  ██║██╔════╝╚══██╔══╝██╔══██╗██║     ██║     ██╔════╝██╔══██╗
 #  ██████╔╝██║██║     █████╗      ██║██╔██╗ ██║███████╗   ██║   ███████║██║     ██║     █████╗  ██████╔╝
@@ -107,23 +107,26 @@ if [ ! -e "$HOME/.config/user-dirs.dirs" ]; then
     xdg-user-dirs-update
 fi
 
-########## ---------- Cloning the Rice! ---------- ##########
-
-logo "Downloading dotfiles"
-
-repo_url="https://github.com/allenmagic/dotfiles"
-repo_dir="$HOME/dotfiles"
-
-# Verifies if the folder of the repository exists
-if [ -d "$repo_dir" ]; then
-    printf "Removing existing dotfiles repository\n"
-    rm -rf "$repo_dir"
-fi
-
-printf "Cloning dotfiles from %s\n" "$repo_url"
-git clone --depth=1 "$repo_url" "$repo_dir"
 sleep 2
 clear
+
+########## ---------- Cloning the Rice! ---------- ##########
+
+# logo "Downloading dotfiles"
+
+# repo_url="https://github.com/allenmagic/dotfiles"
+# repo_dir="$HOME/dotfiles"
+
+# Verifies if the folder of the repository exists
+# if [ -d "$repo_dir" ]; then
+#     printf "Removing existing dotfiles repository\n"
+#     rm -rf "$repo_dir"
+# fi
+
+# printf "Cloning dotfiles from %s\n" "$repo_url"
+# git clone --depth=1 "$repo_url" "$repo_dir"
+# sleep 2
+# clear
 
 ########## ---------- Backup files ---------- ##########
 
