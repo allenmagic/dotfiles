@@ -12,16 +12,9 @@
 - 分拆了字体安装，可以参考后面的字体安装部分
 
 # 安装
-在\~目录下git clone repo后将debianinstaller复制到\~目录下
 ```bash
-    git clone --depth=1 https://github.com/allenmagic/dotfiles.git 
-    cd dotfiles
-    cp DebianInstaller ~
-    cd ~
-```
-
-安装
-```bash
+    git clone --depth=1 https://github.com/allenmagic/dotfiles.git ~/dotfiles
+    cd ~/dotfiles
     chmod +x DebianInstaller
     bash DebianInstaller
 ```
