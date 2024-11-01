@@ -9,25 +9,24 @@
 #	- allenmagic
 #	- https://github.com/allenmagic/dotfiles
 #	- allenmagic@163.com
-#
 
 read -r RICETHEME < "$HOME"/.config/bspwm/.rice
-export RICETHEME
-PATH="$HOME/.config/bspwm/scripts:$PATH"
-rice_dir="$HOME/.config/bspwm/rices/$RICETHEME"
-export XDG_CURRENT_DESKTOP='bspwm'
 
+# Set environment variables
+export PATH="$HOME/.config/bspwm/src:$PATH"
+export XDG_CURRENT_DESKTOP='bspwm'
 ## Fix java applications
 export _JAVA_AWT_WM_NONREPARENTING=1
+
 
 #  ╦ ╦╔═╗╦═╗╦╔═╔═╗╔═╗╔═╗╔═╗╔═╗╔═╗
 #  ║║║║ ║╠╦╝╠╩╗╚═╗╠═╝╠═╣║  ║╣ ╚═╗
 #  ╚╩╝╚═╝╩╚═╩ ╩╚═╝╩  ╩ ╩╚═╝╚═╝╚═╝
 
-# Default 1 monitor with 6 workspaces
+# Default 1 monitor with 8 workspaces
 for monitor in $(xrandr -q | grep -w 'connected' | cut -d' ' -f1); do
-    bspc monitor "$monitor" -d '1' '2' '3' '4' '5' '6' '7' '8' '9'
-    #bspc monitor "$monitor" -d '' '' '' '' '' ''
+    bspc monitor "$monitor" -d '1' '2' '3' '4' '5' '6' '7' '8' 
+    #bspc monitor "$monitor" -d '' '' '' '' '' '' '' ''
 done
 
 ## For two or three monitors configuration see https://github.com/gh0stzk/dotfiles/wiki/Two-or-more-monitors-setup
@@ -38,7 +37,7 @@ done
 
 bspc config external_rules_command "$HOME"/.config/bspwm/scripts/ExternalRules
 
-bspc config window_gap                8
+bspc config window_gap                6
 bspc config split_ratio               0.62
 bspc config single_monocle            true
 bspc config borderless_monocle        false
@@ -60,50 +59,39 @@ bspc rule -a scratch sticky=on state=floating focus=on
 #  ╩ ╩╚═╝ ╩ ╚═╝╚═╝ ╩ ╩ ╩╩╚═ ╩
 
 # Set system vars for polybar
-. SetSysVars
+"$HOME"/.config/bspwm/src/SetSysVars
 
-# Terminate already running polybar, stalonetray, sxhkd and dunst instances
-processes=("sxhkd" "polybar" "dunst" "eww.*bar")
+# Launch sxhkd daemon
+pidof -q sxhkd || { sxhkd -c "${HOME}"/.config/bspwm/src/config/sxhkdrc & }
 
-for process in "${processes[@]}"; do
-    if pgrep -f "$process"; then
-        pkill -f "$process" > /dev/null; sleep 0.25
-    fi
-done
+# Launch picom
+pidof -q picom || { picom --config "${HOME}"/.config/bspwm/src/config/picom.conf & }
 
-# Load bspwm conf, colors, dunst, bars and/or eww widgets
-. "${rice_dir}"/Theme.sh
+# Load current theme
+"${HOME}"/.config/bspwm/rices/"${RICETHEME}"/Theme.sh
 
+# Launch xsettingsd
+pidof -q xsettings || { xsettingsd --config="${HOME}"/.config/bspwm/src/config/xsettingsd >/dev/null 2>&1 & }
 
-# Reload sxhkd daemon
-sxhkd -c "$HOME"/.config/bspwm/sxhkdrc &
+# Launch eww daemon
+pidof -q eww || { eww -c "${HOME}"/.config/bspwm/eww daemon & }
 
-# Launch picom // If you have old hardware or encounter problems
-# uncomment the picom "--legacy-backends" line and comment the current one.
-# pidof -q picom || { picom --config "$HOME"/.config/bspwm/picom.conf & }
-pidof -q picom || { picom --legacy-backends --config "$HOME"/.config/bspwm/picom.conf & }
+# Launch clipboard daemon
+pidof -q greenclip || { greenclip daemon & }
 
-# Launch dunst notification daemon
-dunst -config "$HOME"/.config/bspwm/dunstrc &
+# Launch polkit
+pidof -q polkit-gnome-authentication-agent-1 || { /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & }
+
+# Start one time code
+sh -c 'alacritty --hold -e cat $HOME/.config/bspwm/src/config/FirstMessage.txt && sed -i "/# Start one time code/,/# End one time code/d" ~/.config/bspwm/bspwmrc'
+# End one time code
+
+# Unlock the desktop
+CURRENT_DESKTOP=$(bspc query -d focused)
+bspc desktop -f "^1"
 
 # Launch fcitx5 input method
 fcitx5 &
 
 # Auto mount USB disk
 udiskie &
-
-# Set random wallpaper for actual rice
-feh -z --no-fehbg --bg-fill "${rice_dir}"/walls
-
-# Launch eww daemon
-pidof -q eww || { eww -c "$HOME"/.config/bspwm/eww daemon & }
-
-# Launch polkit
-pidof -q polkit-gnome-authentication-agent-1 || { /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & }
-
-# Fix cursor
-xsetroot -cursor_name left_ptr
-
-# Unlock the desktop
-CURRENT_DESKTOP=$(bspc query -d focused)
-bspc desktop -f "^1"

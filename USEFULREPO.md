@@ -23,3 +23,7 @@ https://github.com/TypicalAM/goread.git
 
 - Hybrid Font，热心人创建的一个等宽字体，支持中英文等宽适合在编辑器中使用
 https://github.com/aleigood/Hybrid-Font.git
+
+
+- Maple Mono NF 字体
+https://github.com/subframe7536/maple-font.git

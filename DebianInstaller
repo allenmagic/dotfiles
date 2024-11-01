@@ -111,17 +111,27 @@ sleep 2
 clear
 
 
-
 ########## ---------- Backup files ---------- ##########
 
 logo "Backup files"
+
+printf "If you already have a powerful and super Pro NEOVIM configuration, write 'n' in the next question. If you answer 'y' your neovim configuration will be moved to the backup directory.\n\n"
+
+while true; do
+    read -rp "Do you want to try my nvim config? (y/n): " try_nvim
+    if [[ "$try_nvim" == "y" || "$try_nvim" == "n" ]]; then
+        break
+    else
+        echo "Invalid input. Please enter 'y' or 'n'."
+    fi
+done
 
 printf "\nBackup files will be stored in %s%s%s/.RiceBackup%s \n\n" "${BLD}" "${CRE}" "$HOME" "${CNC}"
 sleep 10
 
 [ ! -d "$backup_folder" ] && mkdir -p "$backup_folder"
 
-for folder in bspwm alacritty picom rofi eww sxhkd dunst kitty polybar ncmpcpp ranger tmux zsh mpd ; do
+for folder in bspwm alacritty picom rofi eww sxhkd dunst kitty polybar geany gtk-3.0 ncmpcpp ranger tmux zsh mpd paru; do
     if [ -d "$HOME/.config/$folder" ]; then
         if mv "$HOME/.config/$folder" "$backup_folder/${folder}_$date" 2>> RiceError.log; then
             printf "%s%s%s folder backed up successfully at %s%s/%s_%s%s\n" "${BLD}" "${CGR}" "$folder" "${CBL}" "$backup_folder" "$folder" "$date" "${CNC}"
@@ -135,6 +145,22 @@ for folder in bspwm alacritty picom rofi eww sxhkd dunst kitty polybar ncmpcpp r
         sleep 1
     fi
 done
+
+if [[ $try_nvim == "y" ]]; then
+        # Backup nvim
+    if [ -d "$HOME/.config/nvim" ]; then
+        if mv "$HOME/.config/nvim" "$backup_folder/nvim_$date" 2>> RiceError.log; then
+                printf "%s%snvim folder backed up successfully at %s%s/nvim_%s%s\n" "${BLD}" "${CGR}" "${CBL}" "$backup_folder" "$date" "${CNC}"
+                sleep 1
+            else
+                printf "%s%sFailed to backup nvim folder. See %sRiceError.log%s\n" "${BLD}" "${CRE}" "${CBL}" "${CNC}"
+                sleep 1
+        fi
+        else
+            printf "%s%snvim folder does not exist, %sno backup needed%s\n" "${BLD}" "${CGR}" "${CYE}" "${CNC}"
+            sleep 1
+    fi
+fi
 
 for folder in "$HOME"/.mozilla/firefox/*.default-release/chrome; do
     if [ -d "$folder" ]; then
@@ -170,8 +196,29 @@ else
     printf "%s%sThe file .zshrc does not exist, %sno backup needed%s\n" "${BLD}" "${CGR}" "${CYE}" "${CNC}"
 fi
 
+if [ -f ~/.gtkrc-2.0 ]; then
+    if mv ~/.gtkrc-2.0 "$backup_folder"/.gtkrc-2.0_"$date" 2>> RiceError.log; then
+        printf "%s%s.gtkrc-2.0 file backed up successfully at %s%s/.gtkrc-2.0_%s%s\n" "${BLD}" "${CGR}" "${CBL}" "$backup_folder" "${date}" "${CNC}"
+    else
+        printf "%s%sFailed to backup .gtkrc-2.0 file. See %sRiceError.log%s\n" "${BLD}" "${CRE}" "${CBL}" "${CNC}"
+    fi
+else
+    printf "%s%sThe file .gtkrc-2.0 does not exist, %sno backup needed%s\n" "${BLD}" "${CGR}" "${CYE}" "${CNC}"
+fi
+
+if [ -d ~/.icons ]; then
+    if mv ~/.icons "$backup_folder"/.icons"$date" 2>> RiceError.log; then
+        printf "%s%s.icons folder backed up successfully at %s%s/.icons_%s%s\n" "${BLD}" "${CGR}" "${CBL}" "$backup_folder" "${date}" "${CNC}"
+    else
+        printf "%s%sFailed to backup .icons folder. See %sRiceError.log%s\n" "${BLD}" "${CRE}" "${CBL}" "${CNC}"
+    fi
+else
+    printf "%s%sThe .icons folder does not exist, %sno backup needed%s\n" "${BLD}" "${CGR}" "${CYE}" "${CNC}"
+fi
+
 printf "%s%sDone!!%s\n\n" "${BLD}" "${CGR}" "${CNC}"
 sleep 5
+
 
 ########## ---------- Copy the Rice! ---------- ##########
 
@@ -184,6 +231,10 @@ printf "Copying files to respective directories..\n"
 
 for dirs in ~/dotfiles/config/*; do
     dir_name=$(basename "$dirs")
+# If the directory is nvim and the user doesn't want to try it, skip this loop
+    if [[ $dir_name == "nvim" && $try_nvim != "y" ]]; then
+        continue
+    fi
     if cp -R "${dirs}" ~/.config/ 2>> RiceError.log; then
         printf "%s%s%s %sconfiguration installed succesfully%s\n" "${BLD}" "${CYE}" "${dir_name}" "${CGR}" "${CNC}"
         sleep 1
@@ -193,7 +244,7 @@ for dirs in ~/dotfiles/config/*; do
     fi
 done
 
-for folder in applications asciiart startup-page fcitx5; do
+for folder in applications asciiart fonts startup-page; do
     if cp -R ~/dotfiles/misc/$folder ~/.local/share/ 2>> RiceError.log; then
         printf "%s%s%s %sfolder copied succesfully!%s\n" "${BLD}" "${CYE}" "$folder" "${CGR}" "${CNC}"
         sleep 1
@@ -219,15 +270,27 @@ else
     sleep 1
 fi
 
+
+if cp -R ~/dotfiles/home/.icons "$HOME" 2>> RiceError.log; then
+    printf "%s%s.icons folder %scopied succesfully!%s\n" "${BLD}" "${CYE}" "${CGR}" "${CNC}"
+    sleep 1
+else
+    printf "%s%s.icons folder %sfailed to been copied, see %sRiceError.log %sfor more details.%s\n" "${BLD}" "${CYE}" "${CRE}" "${CBL}" "${CRE}" "${CNC}"
+    sleep 1
+fi
+
+
 sed -i "s/user_pref(\"browser.startup.homepage\", \"file:\/\/\/home\/z0mbi3\/.local\/share\/startup-page\/index.html\")/user_pref(\"browser.startup.homepage\", \"file:\/\/\/home\/$USER\/.local\/share\/startup-page\/index.html\")/" "$HOME"/.mozilla/firefox/*.default-release/user.js
 sed -i "s/name: 'gh0stzk'/name: '$USER'/" "$HOME"/.local/share/startup-page/config.js
 cp -f "$HOME"/dotfiles/home/.zshrc "$HOME"
+cp -f "$HOME"/dotfiles/home/.gtkrc-2.0 "$HOME"
 fc-cache -rv >/dev/null 2>&1
 
 printf "\n\n%s%sFiles copied succesfully!!%s\n" "${BLD}" "${CGR}" "${CNC}"
 sleep 5
 
-########## ---------- Installing Eww, tdrop, xqp & others ---------- ##########
+
+########## ---------- Installing Eww & others ---------- ##########
 
 logo "installing Eww, tdrop & xqp"
 
@@ -247,25 +310,27 @@ logo "installing Eww, tdrop & xqp"
     fi
 
 
-# Installing Eww
-if command -v eww >/dev/null 2>&1; then
-    printf "\n%s%sEww is already installed%s\n" "${BLD}" "${CGR}" "${CNC}"
-else
-    printf "\n%s%sDownload and installing eww..%s\n" "${BLD}" "${CBL}" "${CNC}"
-    if curl -L https://github.com/gh0stzk/pkgs/raw/main/eww -o eww; then
-        echo "Download complete."
-        chmod +x eww
-        echo "Installing eww..."
-            if sudo install -Dm755 eww /usr/bin/eww; then
-                echo "Installation complete."
-                rm eww
-            else
-                echo "Error: Something happend."
-            fi
+# Installing Eww 
+    if command -v eww >/dev/null 2>&1; then 
+        printf "\n%s%sEww is already installed%s\n" "${BLD}" "${CGR}" "${CNC}"
     else
-        echo "Error: The file can't be downloaded.."
-    fi
+        printf "\n%s%sInstalling Eww, it will be fast.%s\n" "${BLD}" "${CBL}" "${CNC}"
+        {
+            cd ~/dotfiles/packages || exit
+            chmod +x eww
+            echo "Installing eww..."
+                if sudo install -Dm755 eww /usr/bin/eww; then
+                    echo "Installation complete."
+                else
+                    echo "Error: Something happend."
+                fi
+        } && {
+            cd "$HOME" || exit
+        } || {
+        printf "\n%s%sFailed to install stalonetray. You may need to install it manually%s\n" "${BLD}" "${CRE}" "${CNC}"
+    }
 fi
+
 
 # Installing xqp
     if command -v xqp >/dev/null 2>&1; then 
@@ -283,6 +348,8 @@ fi
         printf "\n%s%sFailed to install xqp. You may need to install it manually%s\n" "${BLD}" "${CRE}" "${CNC}"
     }
 fi
+
+
 
 # Installing stalonetray and clear the installation folder
     if command -v stalonetray >/dev/null 2>&1; then 

@@ -11,11 +11,11 @@ const CONFIG = {
 	// └─┘┴ ┴└─┘┴└─┘└─┘
 
 	// General
-	name: 'allenmagic',
+	name: 'gh0stzk',
 	imageBackground: false,
 	openInNewTab: true,
 	twelveHourFormat: true,
-	timeZone: 'Asia/Shanghai',
+	timeZone: 'America/Mexico_City',
 
 	// Greetings
 	greetingMorning: 'Good morning!',
@@ -30,14 +30,14 @@ const CONFIG = {
 	weatherKey: '8b05d62206f459e1d298cbe5844d7d87', // Write here your API Key
 	weatherIcons: 'OneDark', // 'Onedark', 'Nord', 'Dark', 'White'
 	weatherUnit: 'C', // 'F', 'C'
-	language: 'zh_cn', // More languages in https://openweathermap.org/current#multi
+	language: 'en', // More languages in https://openweathermap.org/current#multi
 
 	trackLocation: true, // If false or an error occurs, the app will use the lat/lon below
 	defaultLatitude: '19.593',
 	defaultLongitude: '-99.250',
 
 	// Autochange
-	autoChangeTheme: true,
+	autoChangeTheme: false,
 
 	// Autochange by OS
 	changeThemeByOS: true,
@@ -144,16 +144,16 @@ const CONFIG = {
 					link: 'https://github.com/gh0stzk/dotfiles',
 				},
 				{
-					name: 'Arch维基',
-					link: 'https://wiki.archlinux.org/',
+					name: 'Arch Linux',
+					link: 'https://archlinux.org/',
 				},
 				{
-					name: '知乎',
-					link: 'https://www.zhihu.com/',
+					name: 'ChatGPT',
+					link: 'https://chat.openai.com/',
 				},
 				{
-					name: '京东',
-					link: 'https://jd.com/',
+					name: 'MonkeyType',
+					link: 'https://monkeytype.com/',
 				},
 			],
 		},
@@ -162,16 +162,16 @@ const CONFIG = {
 			id: '2',
 			links: [
 				{
-					name: 'B站',
-					link: 'https://www.bilibili.com',
+					name: 'YouTube',
+					link: 'https://www.youtube.com',
 				},
 				{
-					name: '爱奇艺',
-					link: 'https://www.iqiyi.com',
+					name: 'Netflix',
+					link: 'https://www.netflix.com',
 				},
 				{
-					name: '腾讯视频',
-					link: 'https://v.qq.com',
+					name: 'Twitch',
+					link: 'https://www.twitch.tv',
 				},
 				{
 					name: 'Amazon Prime',

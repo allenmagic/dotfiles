@@ -1,22 +1,26 @@
-#  ╔═╗╔═╗╦ ╦╦═╗╔═╗  ╔═╗╔═╗╔╗╔╔═╗╦╔═╗	- z0mbi3
-#  ╔═╝╚═╗╠═╣╠╦╝║    ║  ║ ║║║║╠╣ ║║ ╦	- https://github.com/gh0stzk/dotfiles
-#  ╚═╝╚═╝╩ ╩╩╚═╚═╝  ╚═╝╚═╝╝╚╝╚  ╩╚═╝	- My zsh conf
-#   Modified by allenmaigc for Debian distro
+#  ╔═╗╔═╗╦ ╦╦═╗╔═╗  ╔═╗╔═╗╔╗╔╔═╗╦╔═╗  - z0mbi3
+#  ╔═╝╚═╗╠═╣╠╦╝║    ║  ║ ║║║║╠╣ ║║ ╦  - https://github.com/gh0stzk/dotfiles
+#  ╚═╝╚═╝╩ ╩╩╚═╚═╝  ╚═╝╚═╝╝╚╝╚  ╩╚═╝  - My zsh conf
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
 
 #  ┬  ┬┌─┐┬─┐┌─┐
 #  └┐┌┘├─┤├┬┘└─┐
 #   └┘ ┴ ┴┴└─└─┘
 export VISUAL="${EDITOR}"
-export EDITOR='nvim'
+export EDITOR='geany'
 export BROWSER='firefox'
 export HISTORY_IGNORE="(ls|cd|pwd|exit|sudo reboot|history|cd -|cd ..)"
+export SUDO_PROMPT="Deploying root access for %u. Password pls: "
+export BAT_THEME="base16"
 
 if [ -d "$HOME/.local/bin" ] ;
   then PATH="$HOME/.local/bin:$PATH"
 fi
 
 #  ┬  ┌─┐┌─┐┌┬┐  ┌─┐┌┐┌┌─┐┬┌┐┌┌─┐
-#  │  │ │├─┤ ││  ├┤ ││││ ┬││││├┤ 
+#  │  │ │├─┤ ││  ├┤ ││││ ┬││││├┤
 #  ┴─┘└─┘┴ ┴─┴┘  └─┘┘└┘└─┘┴┘└┘└─┘
 autoload -Uz compinit
 
@@ -34,7 +38,10 @@ _comp_options+=(globdots)
 zstyle ':completion:*' verbose true
 zstyle ':completion:*:*:*:*:*' menu select
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS} 'ma=48;5;197;1'
-zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' matcher-list \
+    'm:{a-zA-Z}={A-Za-z}' \
+    '+r:|[._-]=* r:|=*' \
+    '+l:|=*'
 zstyle ':completion:*:warnings' format "%B%F{red}No matches for:%f %F{magenta}%d%b"
 zstyle ':completion:*:descriptions' format '%F{yellow}[-- %d --]%f'
 zstyle ':vcs_info:*' formats ' %B%s-[%F{magenta}%f %F{yellow}%b%f]-'
@@ -52,10 +59,18 @@ bindkey "^I" expand-or-complete-with-dots
 
 #  ┬ ┬┬┌─┐┌┬┐┌─┐┬─┐┬ ┬
 #  ├─┤│└─┐ │ │ │├┬┘└┬┘
-#  ┴ ┴┴└─┘ ┴ └─┘┴└─ ┴ 
+#  ┴ ┴┴└─┘ ┴ └─┘┴└─ ┴
 HISTFILE=~/.config/zsh/zhistory
 HISTSIZE=5000
 SAVEHIST=5000
+HISTDUP=erase
+setopt appendhistory
+setopt sharehistory
+setopt hist_ignore_space
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
 
 #  ┌─┐┌─┐┬ ┬  ┌─┐┌─┐┌─┐┬    ┌─┐┌─┐┌┬┐┬┌─┐┌┐┌┌─┐
 #  ┌─┘└─┐├─┤  │  │ ││ ││    │ │├─┘ │ ││ ││││└─┐
@@ -63,10 +78,8 @@ SAVEHIST=5000
 setopt AUTOCD              # change directory just by typing its name
 setopt PROMPT_SUBST        # enable command substitution in prompt
 setopt MENU_COMPLETE       # Automatically highlight first element of completion menu
-setopt LIST_PACKED		     # The completion menu takes less space.
+setopt LIST_PACKED       # The completion menu takes less space.
 setopt AUTO_LIST           # Automatically list choices on ambiguous completion.
-setopt HIST_IGNORE_DUPS	   # Do not write events to history that are duplicates of previous events
-setopt HIST_FIND_NO_DUPS   # When searching history don't display results already cycled through twice
 setopt COMPLETE_IN_WORD    # Complete from both ends of a word.
 
 #  ┌┬┐┬ ┬┌─┐  ┌─┐┬─┐┌─┐┌┬┐┌─┐┌┬┐
@@ -82,6 +95,12 @@ function dir_icon {
 
 PS1='%B%F{blue}󰣚%f%b  %B%F{magenta}%n%f%b $(dir_icon)  %B%F{red}%~%f%b${vcs_info_msg_0_} %(?.%B%F{green}.%F{red})%f%b '
 
+# command not found
+command_not_found_handler() {
+  printf "%s%s? I don't know what is it\n" "$acc" "$0" >&2
+    return 127
+}
+
 
 #  ┌─┐┬  ┬ ┬┌─┐┬┌┐┌┌─┐
 #  ├─┘│  │ ││ ┬││││└─┐
@@ -89,7 +108,7 @@ PS1='%B%F{blue}󰣚%f%b  %B%F{magenta}%n%f%b $(dir_icon)  %B%F{red}%~%f%b${vcs_i
 if [[ ! -d ~/.config/zplug ]]; then
   git clone --depth=1 https://github.com/zplug/zplug ~/.config/zplug 
 fi
-source ~/.config/zplug/init.zsh && zplug update --self
+source ~/.config/zplug/init.zsh # && zplug update --self
 
 zplug "zsh-users/zsh-autosuggestions", as:plugin
 zplug "zsh-users/zsh-syntax-highlighting", as:plugin
@@ -108,23 +127,24 @@ zplug load
 
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
+bindkey '^[[3~' delete-char
 
 #  ┌─┐┬ ┬┌─┐┌┐┌┌─┐┌─┐  ┌┬┐┌─┐┬─┐┌┬┐┬┌┐┌┌─┐┬  ┌─┐  ┌┬┐┬┌┬┐┬  ┌─┐
-#  │  ├─┤├─┤││││ ┬├┤    │ ├┤ ├┬┘│││││││├─┤│  └─┐   │ │ │ │  ├┤ 
+#  │  ├─┤├─┤││││ ┬├┤    │ ├┤ ├┬┘│││││││├─┤│  └─┐   │ │ │ │  ├┤
 #  └─┘┴ ┴┴ ┴┘└┘└─┘└─┘   ┴ └─┘┴└─┴ ┴┴┘└┘┴ ┴┴─┘└─┘   ┴ ┴ ┴ ┴─┘└─┘
 function xterm_title_precmd () {
-	print -Pn -- '\e]2;%n@%m %~\a'
-	[[ "$TERM" == 'screen'* ]] && print -Pn -- '\e_\005{g}%n\005{-}@\005{m}%m\005{-} \005{B}%~\005{-}\e\\'
+  print -Pn -- '\e]2;%n@%m %~\a'
+  [[ "$TERM" == 'screen'* ]] && print -Pn -- '\e_\005{g}%n\005{-}@\005{m}%m\005{-} \005{B}%~\005{-}\e\\'
 }
 
 function xterm_title_preexec () {
-	print -Pn -- '\e]2;%n@%m %~ %# ' && print -n -- "${(q)1}\a"
-	[[ "$TERM" == 'screen'* ]] && { print -Pn -- '\e_\005{g}%n\005{-}@\005{m}%m\005{-} \005{B}%~\005{-} %# ' && print -n -- "${(q)1}\e\\"; }
+  print -Pn -- '\e]2;%n@%m %~ %# ' && print -n -- "${(q)1}\a"
+  [[ "$TERM" == 'screen'* ]] && { print -Pn -- '\e_\005{g}%n\005{-}@\005{m}%m\005{-} \005{B}%~\005{-} %# ' && print -n -- "${(q)1}\e\\"; }
 }
 
-if [[ "$TERM" == (kitty*|alacritty*|termite*|gnome*|konsole*|kterm*|putty*|rxvt*|screen*|tmux*|xterm*) ]]; then
-	add-zsh-hook -Uz precmd xterm_title_precmd
-	add-zsh-hook -Uz preexec xterm_title_preexec
+if [[ "$TERM" == (kitty*|alacritty*|tmux*|screen*|xterm*) ]]; then
+  add-zsh-hook -Uz precmd xterm_title_precmd
+  add-zsh-hook -Uz preexec xterm_title_preexec
 fi
 
 #  ┌─┐┬  ┬┌─┐┌─┐
@@ -137,14 +157,17 @@ alias mantenimiento="sudo apt-get autoremove && sudo apt-get clean"
 alias purga="sudo apt-get autoremove --purge && sudo apt-get clean && sudo fstrim -av"
 alias update="sudo apt update && sudo apt upgrade -y"
 
-alias vm-on="sudo systemctl start libvirtd.service"
-alias vm-off="sudo systemctl stop libvirtd.service"
 
-alias musica="ncmpcpp"
-alias music="musicfox"
+alias music="ncmpcpp"
+alias wangyiyun="musicfox"
 
 alias ls='lsd -a --group-directories-first'
 alias ll='lsd -la --group-directories-first'
+
+# These commands need to install
+# alias cat="bat --theme=base16"
+# alias ls='eza --icons=always --color=always -a'
+# alias ll='eza --icons=always --color=always -la'
 
 #  ┌─┐┬ ┬┌┬┐┌─┐  ┌─┐┌┬┐┌─┐┬─┐┌┬┐
 #  ├─┤│ │ │ │ │  └─┐ │ ├─┤├┬┘ │ 
