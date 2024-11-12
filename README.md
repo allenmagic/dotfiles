@@ -16,8 +16,8 @@
 ```bash
     git clone --depth=1 https://github.com/allenmagic/dotfiles.git ~/dotfiles
     cd ~/dotfiles
-    chmod +x DebianInstaller
-    bash DebianInstaller
+    chmod +x install.sh 
+    bash install.sh 
 ```
 
 # 字体
