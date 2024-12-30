@@ -372,7 +372,7 @@ printf "Cloning fonts from %s\n" "$fonts_repo_url"
 git clone --depth=1 "$fonts_repo_url" "$fonts_dir" 
 
 sleep 2
-sudo fc-cache -f -v
+fc-cache -f -v
 clear
 
 
