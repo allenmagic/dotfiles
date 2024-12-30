@@ -22,22 +22,6 @@ CNC=$(tput sgr0)
 backup_folder=~/.RiceBackup
 date=$(date +%Y%m%d-%H%M%S)
 
-########## ---------- Check the figlet to display LOGO  ---------- ##########
-
-is_installed() {
-    dpkg -l "$1" &> /dev/null
-}
-
-for logo_tool in figlet lolcat; do
-    if ! is_installed "$logo_tool"; then
-        sudo apt install -y "$logo_tool"  >/dev/null 2>> RiceError.log
-        exit 1
-    fi
-done
-
-logo () {
-figlet -f big -m 2 -w 200 "Hello, $USER" | lolcat
-}
 
 ########## ---------- You must not run this as root ---------- ##########
 
@@ -53,6 +37,10 @@ if [ "$current_dir" != "$home_dir" ]; then
     printf "%s%sThe script must be executed from the HOME directory.%s\n" "${BLD}" "${CYE}" "${CNC}"
     exit 1
 fi
+
+is_installed() {
+    dpkg -l "$1" &> /dev/null
+}
 
 ########## ---------- Welcome ---------- ##########
 
