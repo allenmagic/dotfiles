@@ -65,7 +65,7 @@ logo "Installing needed packages.."
 # 'zsh-history-substring-search'
 
 dependencias=(build-essential cargo alacritty brightnessctl bspwm dunst feh firefox git kitty imagemagick jq jgmenu \
-        libwebp7 lsd maim mpc mpd ncmpcpp npm pamixer papirus-icon-theme physlock picom playerctl polybar \
+        libwebp7 lsd maim mpc mpd ncmpcpp npm pamixer papirus-icon-theme physlock picom playerctl polybar pipewire \
         policykit-1-gnome python3-gi ranger redshift rofi sxhkd tmux fonts-inconsolata fonts-jetbrains-mono \
         webp-pixbuf-loader xclip xdg-user-dirs x11-xserver-utils xdo xdotool x11-utils zsh wget netselect-apt \
         ueberzug xorg lightdm lightdm-gtk-greeter fcitx5 fcitx5-chinese-addons)
